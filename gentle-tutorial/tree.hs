@@ -12,6 +12,12 @@ exTree = Branch (Branch (Leaf 5) (Branch (Leaf 3) (Leaf 7))) (Leaf 10)
 -- colorTree = Branch (Leaf Red) (Leaf Blue)
 
 
-instance Functor Tree where
-    fmap f (Leaf x)     = Leaf (f x)
-    fmap f (Branch l r) = Branch (fmap f l) (fmap f r)
+-- instance Functor Tree where
+--     fmap f (Leaf x)     = Leaf (f x)
+--     fmap f (Branch l r) = Branch (fmap f l) (fmap f r)
+
+
+
+showsTree :: (Show a, Ord a) => Tree a -> ShowS
+showsTree (Leaf v)     = shows v
+showsTree (Branch l r) = ('<':) . showsTree l . ('|':) . showsTree r . ('>':)
